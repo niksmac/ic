@@ -1,5 +1,5 @@
 
-# ICICI Appathon
+# IC-appathon
 
 
 ## Start Geth in Private Mode
