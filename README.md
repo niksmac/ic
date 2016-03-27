@@ -4,18 +4,36 @@
 
 ## Start Geth in Private Mode
 
-geth --networkid 10234 --ipcpath /Users/niksmac/Library/Ethereum/geth.ipc --nodiscover --maxpeers 0 --genesis /Users/niksmac/iWork/projects/eth/genesis.json --rpc --rpcaddr "127.0.0.1" --datadir /Users/niksmac/iWork/projects/eth --etherbase 0x806578ad71f7811da0344444b832c4c4bd26e4c8 --autodag --unlock 0x806578ad71f7811da0344444b832c4c4bd26e4c8 --minerthreads 1 --mine
+```
+geth --genesis /Users/niksmac/ethereum/genesis.json --datadir /Users/niksmac/ethereum/datadir --networkid 1253 --nodiscover --maxpeers 0 --mine --rpc --rpcaddr "127.0.0.1" --minerthreads 1 --unlock "0x7a9b52d65281d6acc3a5410576031262e854a01e"
+```
+
+#### 2
+```
+geth --genesis /Users/niksmac/ethereum/genesis.json --datadir /Users/niksmac/ethereum/datadir --rpc --rpcaddr "127.0.0.1" --rpcport "8545" --dev --mine --unlock "0x7a9b52d65281d6acc3a5410576031262e854a01e"
+```
+
+`geth attach ipc:///Users/niksmac/ethereum/datadir/geth.ipc`
+
 
 ## Start Redis Server
 `redis-server`
 
 
 ## Accounts
-myrwt3ordd, myrwt3ord5
-
-0x806578ad71f7811da0344444b832c4c4bd26e4c8
 
 
-"0xd64332ccdeb143a7ae0be9ba944d34535a990747"
-"0xf22f215f61eaaf3e635e6d73ac4b114f2e71908e"
-"0x8564c92e61fb49329d07402e42b29dd57e708d9c"
+personal.newAccount("123");
+0x7a9b52d65281d6acc3a5410576031262e854a01e
+"0x1b20a140b87663e53d63bcc3e49dd4a6949b5d3e"
+"0xc07e1ad306c4aa7a4982983d2903a11e6b23bdcd"
+"0x59f9bdccec46a8ad0805e9948bb5036340f1eea5"
+
+
+
+etherbase option work cheytha kondalle nammal console vazhi set cheythathu/?
+
+but its working here
+
+
+let me show
