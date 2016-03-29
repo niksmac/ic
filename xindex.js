@@ -1,5 +1,7 @@
 'use strict';
 
+const Hapi = require('hapi');
+var colors = require('colors');
 var superagent = require('superagent-bluebird-promise');
 var locus = require('locus');
 var redis = require('redis');
@@ -26,8 +28,10 @@ var Promise = require("bluebird");
 //
 
 // API Vars
+
 var loyalty_point_url = "https://dashboard.pegke.com/?q=api/send_points"
 var vuid = 1704
+
 const accessToken = '92e7c9813184';
 var accNos = {
   "5555666677771576": {
@@ -62,41 +66,45 @@ var accNos = {
   }
 };
 
-var app = require('express')();
-var server = require('http').createServer(app);
-var path = require('path');
-var io = require('socket.io')(server);
-io.on('connection', function(socket, err) {
-  // console.log('connected');
 
-
-  socket.on('trasnfer', function(data) {
-
-    console.log(data);
-    var payload = data.data
-
-    socket.emit('trasnferAck', {
-      "data": data
-    });
-
-    payload.payee = 5555666677771577
-    var job = job_queue.create('transaction_job', {
-      code: 200,
-      data: payload,
-    }).save(function(err) {
-      if (!err) console.log('job id:', job.id);
-    });
-
-  });
+const server = new Hapi.Server();
+server.connection({
+  port: 3000
 });
 
+server.route({
+  method: 'GET',
+  path: '/createTransaction',
+  handler: function(request, reply) {
 
-// viewed at http://localhost:3000
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'));
+    superagent
+      .get(
+        'http://retailbanking.mybluemix.net/banking/icicibank/fundTransfer?client_id=nikhil@lightrains.com&token=92e7c9813184&srcAccount=5555666677771577&destAccount=5555666677771576&amt=100&type_of_transaction=dth'
+      )
+      .end(function(err, res) {
+
+        var response = JSON.parse(res.text)
+        var data = response[1]
+        data.payee = 5555666677771577
+        var job = job_queue.create('transaction_job', {
+          code: response[0].code,
+          data: data,
+
+        }).save(function(err) {
+          if (!err) console.log('job id:', job.id);
+        });
+        reply(res.text);
+      });
+  }
 });
 
-server.listen(3030);
+server.start((err) => {
+  if (err) {
+    throw err;
+  }
+  console.log('Server running at:', server.info.uri.green.bold);
+});
+
 
 
 job_queue.process('transaction_job', function(job, done) {
@@ -143,6 +151,7 @@ function add_loyalty_point_to_block_chain(bank_acc_data, loyalty_points) {
     console.log(a)
   }
 }
+
 
 function determine_loyalty_point_for_transaction(bank_acc_data) {
   return (bank_acc_data.transaction_amount / 50)

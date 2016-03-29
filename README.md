@@ -13,7 +13,12 @@ geth --genesis /Users/niksmac/ethereum/genesis.json --datadir /Users/niksmac/eth
 geth --genesis /Users/niksmac/ethereum/genesis.json --datadir /Users/niksmac/ethereum/datadir --rpc --rpcaddr "127.0.0.1" --rpcport "8545" --dev --mine --unlock "0x7a9b52d65281d6acc3a5410576031262e854a01e"
 ```
 
-`geth attach ipc:///Users/niksmac/ethereum/datadir/geth.ipc`
+#### 3
+```
+geth --genesis /Users/niksmac/ethereum/genesis.json --datadir /Users/niksmac/ethereum/datadir --rpc --rpcaddr "127.0.0.1" --rpcport "8545" --dev --mine --unlock "0x7a9b52d65281d6acc3a5410576031262e854a01e" --minerthreads 1 --ipcpath /Users/niksmac/Library/Ethereum/geth.ipc
+```
+
+`geth attach ipc://Users/niksmac/ethereum/datadir/geth.ipc`
 
 
 ## Start Redis Server
