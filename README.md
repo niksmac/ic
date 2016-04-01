@@ -27,18 +27,11 @@ geth --genesis /Users/niksmac/ethereum/genesis.json --datadir /Users/niksmac/eth
 
 ## Accounts
 
-
+```
 personal.newAccount("123");
 0x7a9b52d65281d6acc3a5410576031262e854a01e
 "0x1b20a140b87663e53d63bcc3e49dd4a6949b5d3e"
 "0xc07e1ad306c4aa7a4982983d2903a11e6b23bdcd"
 "0x59f9bdccec46a8ad0805e9948bb5036340f1eea5"
+```
 
-
-
-etherbase option work cheytha kondalle nammal console vazhi set cheythathu/?
-
-but its working here
-
-
-let me show
